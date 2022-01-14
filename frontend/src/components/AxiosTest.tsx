@@ -8,8 +8,8 @@ export default function AxiosTest() {
 
     axios.get("/lists/all/").then(function (response:any) {
         // handle success
-        setResponse(response)
         console.log(response);
+        setResponse(response)
     })
         .catch(function (error: any) {
             // handle error
