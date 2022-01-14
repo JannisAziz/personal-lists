@@ -9,7 +9,7 @@ export default function AxiosTest() {
     axios.get("/lists/all/").then(function (response:any) {
         // handle success
         console.log(response);
-        setResponse(response)
+        setResponse(JSON.parse(response) || "INVALID_OBJECT" )
     })
         .catch(function (error: any) {
             // handle error
