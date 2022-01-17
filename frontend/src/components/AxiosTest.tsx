@@ -1,27 +1,19 @@
-import {useState} from "react";
+import * as backendService from "../services/BackendService";
 
 export default function AxiosTest() {
 
-    const [response, setResponse] = useState("")
+    const lists = backendService.getAllLists()
+    console.log("All Lists: " + lists )
 
-    const axios = require('axios').default;
+    // const firstList = backendService.getListById(lists[0].listId)
+    // console.log("First List: " + firstList)
 
-    axios.get("/lists/all/").then(function (response:any) {
-        // handle success
-        console.log(response);
-        setResponse(JSON.stringify(response) || "INVALID_OBJECT" )
-    })
-        .catch(function (error: any) {
-            // handle error
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
-        });
+    // addList()
+    // removeList()
+    // updateList()
 
     return (
         <div>
-            Here: {response}
         </div>
     )
 }
