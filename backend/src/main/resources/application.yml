@@ -1,3 +1,3 @@
-spring.data.mongodb.uri: ${MONGOCLUSTER_URI:mongodb+srv://HappyHanYolo:KhammasMongo@personalmongocluster.xmch5.mongodb.net/personalLists?retryWrites=true&w=majority}
+spring.data.mongodb.uri: ${MONGOCLUSTER_URI:mongodb://localhost/personalLists?retryWrites=true&w=majority}
 
 server.port: ${PORT:8080}

@@ -6,6 +6,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CustomListDatabase<T> extends MongoRepository<CustomList<T>, ObjectId> {
 
-    boolean existsByListId(ObjectId id);
-
 }

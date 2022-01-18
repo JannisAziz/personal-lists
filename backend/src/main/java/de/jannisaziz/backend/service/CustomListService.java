@@ -2,6 +2,7 @@ package de.jannisaziz.backend.service;
 
 import de.jannisaziz.backend.database.CustomListDatabase;
 import de.jannisaziz.backend.model.CustomList;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,30 +14,32 @@ public class CustomListService<T>{
     @Autowired
     CustomListDatabase<T> database;
 
+    // GET
     public Collection<CustomList<T>> getAllLists() {
         return database.findAll();
     }
-
-    public String addList(CustomList<T> newList) {
-        database.save(newList);
-        return "List added";
-    }
-
-    /*
     public CustomList<T> getListById(ObjectId id) {
-        return null;
-    }
-    public CustomList<T> getListByName(String name) {
-        return null;
+        return database.findById(id).orElseThrow();
     }
 
+    // ADD & REMOVE
+    public CustomList<T> addList(CustomList<T> newList) {
+        return database.insert(newList);
+    }
 
     public String removeList(CustomList<T> oldList) {
-        return null;
-    }
-    public String updateList(CustomList<T> updatedList) {
-        return null;
+        database.delete(oldList);
+        return "List removed";
     }
 
-    */
+    // UPDATE
+    public String updateList(CustomList<T> updatedList) {
+        if (database.existsById(updatedList.getListId())){
+            database.save(updatedList);
+            return "List updated";
+        }
+        else {
+            return "List doesnt exist";
+        }
+    }
 }
