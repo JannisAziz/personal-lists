@@ -4,12 +4,9 @@ import ShoppingListItem from "../models/ShoppingListItem";
 import ItemCard from "./ItemCard";
 import "../styles/CustomStyles.scss"
 
-
 export default function ShoppingList(){
 
-
     // todo: try axios fetch requests (use relative url/i's)
-
 
     const [userInput, setUserInput] = useState('')
     const updateInput = (inputEvent: ChangeEvent<HTMLInputElement>) => {
@@ -42,11 +39,6 @@ export default function ShoppingList(){
     }
     const removeItem = (itemToRemove: ShoppingListItem) => {
         setItems(items.filter(item => item !== itemToRemove))
-    }
-
-    //DONT NEED THIS?!
-    const getItemCount = (currentItem: ShoppingListItem) => {
-        return items.filter( item => item === currentItem )[0].count || 1
     }
 
     const updateItemCount = (itemToChange: ShoppingListItem, newCount: number) => {

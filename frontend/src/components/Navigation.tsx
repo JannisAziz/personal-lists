@@ -16,6 +16,12 @@ export default function Navigation (props: { currentPage: string }){
                         ShoppingList
                     </button>
                 </Link> : null}
+            {props.currentPage !== "TodoListPage" ?
+                <Link to="todoListPage">
+                    <button>
+                        TodoList
+                    </button>
+                </Link> : null}
         </div>
     )
 }
