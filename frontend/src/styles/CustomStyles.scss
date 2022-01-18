@@ -1,0 +1,108 @@
+
+// Variables
+$primaryColor: #777777;
+$primaryColorDarker: darken($primaryColor, 20%);
+$primaryColorLighter: lighten($primaryColor, 10%);
+
+$primaryTextColor: white;
+$secondaryTextColor: black;
+
+// Mixins
+@mixin primaryBorderStyling {
+  border: 2px solid $primaryColor;
+  border-radius: 5px 15px;
+}
+
+@mixin altBorderStyling {
+  border: 2px solid $primaryColorLighter;
+  border-radius: 5px 15px;
+}
+
+// Classes
+body {
+  background-color: $primaryColor;
+}
+
+.header {
+  background-color: $primaryColorDarker;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: $primaryTextColor;
+}
+
+.navigation-bar {
+  background-color: $primaryColor;
+  height: 5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1vmin);
+  color: $primaryTextColor;
+
+  button {
+    background-color: darkgrey;
+    border-color: grey;
+    font-size: 18px;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: green;
+      border-color: grey;
+      font-size: 18px;
+      border-radius: 4px;
+    }
+  }
+}
+
+.article {
+  background-color: $primaryColorLighter;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+}
+
+.addItemField {
+  @include primaryBorderStyling;
+
+  padding: 1rem;
+
+  input {
+    @include primaryBorderStyling;
+    font-size: 2rem;
+  }
+
+  button {
+    font-size: 2rem;
+
+    &:hover {
+
+    }
+
+    &:active {
+
+    }
+  }
+}
+
+.itemCard {
+  @include primaryBorderStyling;
+
+  padding: 1rem;
+  display: flex;
+
+  input {
+    margin-left: auto;
+    width: 20%;
+  }
+
+  button {
+  }
+}
