@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("lists")
+@RequestMapping("api/lists")
 public class CustomListController<T> {
 
     private final CustomListService<T> listService;
@@ -22,6 +22,12 @@ public class CustomListController<T> {
     public Collection<CustomList<T>> getAllLists(){
         return listService.getAllLists();
     }
+    /*
+    @GetMapping("type={type}")
+    public Collection<CustomList<T>> getAllListsByType(@PathVariable LIST_TYPE type){
+        return listService.getAllListsByType(type);
+    }
+    */
     @GetMapping("id={id}")
     public CustomList<T> getListById(@PathVariable ObjectId id){
         return listService.getListById(id);
@@ -29,7 +35,7 @@ public class CustomListController<T> {
 
     // ADD & REMOVE
     @PutMapping("all")
-    public String addList(@RequestBody CustomList<T> newList){
+    public CustomList<T> addList(@RequestBody CustomList<T> newList){
         return listService.addList(newList);
     }
     @DeleteMapping("all")
@@ -39,5 +45,7 @@ public class CustomListController<T> {
 
     // UPDATE
     @PatchMapping("all")
-    public  String updateList(@RequestBody CustomList<T> updatedList) { return listService.updateList(updatedList); }
+    public  String updateList(@RequestBody CustomList<T> updatedList) {
+        return listService.updateList(updatedList);
+    }
 }

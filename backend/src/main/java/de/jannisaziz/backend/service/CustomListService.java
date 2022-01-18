@@ -23,10 +23,10 @@ public class CustomListService<T>{
     }
 
     // ADD & REMOVE
-    public String addList(CustomList<T> newList) {
-        database.insert(newList);
-        return "List added";
+    public CustomList<T> addList(CustomList<T> newList) {
+        return database.insert(newList);
     }
+
     public String removeList(CustomList<T> oldList) {
         database.delete(oldList);
         return "List removed";
@@ -34,7 +34,12 @@ public class CustomListService<T>{
 
     // UPDATE
     public String updateList(CustomList<T> updatedList) {
-        database.save(updatedList);
-        return "List updated";
+        if (database.existsById(updatedList.getListId())){
+            database.save(updatedList);
+            return "List updated";
+        }
+        else {
+            return "List doesnt exist";
+        }
     }
 }

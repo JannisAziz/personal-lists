@@ -26,4 +26,13 @@ public class CustomList<T> {
         listName = name;
         listItems = items;
     }
+
+    @Override
+    public String toString() {
+        return "CustomList{" +
+                "listId=" + listId +
+                ", listName='" + listName + '\'' +
+                ", listItems=" + listItems +
+                '}';
+    }
 }
