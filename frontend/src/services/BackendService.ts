@@ -13,8 +13,8 @@ export const getListById = (id : ObjectId) =>
 export const addList = (newList: CustomList) =>
     axios.put("/api/lists/all/", newList).then( (response:AxiosResponse) => response.data as CustomList)
 
-// export const removeList = (oldList: CustomList) =>
-//     axios.delete("/lists/all/", oldList)
+export const removeList = (oldList: CustomList) =>
+    axios.post("/api/lists/delete/", oldList).then(console.log)
 
 export const updateList = (updatedList: CustomList) =>
     axios.patch("/api/lists/all/", updatedList)

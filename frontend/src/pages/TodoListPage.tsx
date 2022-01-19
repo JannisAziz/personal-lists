@@ -4,6 +4,7 @@ import {addList, getAllLists} from "../services/BackendService";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {CustomList} from "../models/CustomList";
 import AddForm from "../components/AddForm";
+import TodoList from "../components/TodoList";
 
 export default function TodoListPage() {
     const pageName = "TodoListPage"
@@ -38,8 +39,7 @@ export default function TodoListPage() {
             <AddForm addFunc={createList} userInput={userInput} updateFunc={updateInput} />
 
             {lists?.map((list) =>
-                <p>{list?.listName}</p>
-                // (<TodoList listData={list}/>)
+                (<TodoList listData={list}/>)
             )}
         </article>
     );

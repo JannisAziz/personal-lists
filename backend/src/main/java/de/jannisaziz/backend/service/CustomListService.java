@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 @Service
 public class CustomListService<T>{
@@ -28,8 +29,13 @@ public class CustomListService<T>{
     }
 
     public String removeList(CustomList<T> oldList) {
-        database.delete(oldList);
-        return "List removed";
+
+        if (database.existsById(oldList.getListId())){
+            database.delete(oldList);
+            return "List removed";
+        }
+
+        return "List doesnt exist";
     }
 
     // UPDATE

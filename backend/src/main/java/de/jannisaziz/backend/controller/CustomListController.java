@@ -29,8 +29,8 @@ public class CustomListController<T> {
     }
     */
     @GetMapping("id={id}")
-    public CustomList<T> getListById(@PathVariable ObjectId id){
-        return listService.getListById(id);
+    public CustomList<T> getListById(@PathVariable String id){
+        return listService.getListById(new ObjectId(id));
     }
 
     // ADD & REMOVE
@@ -38,8 +38,9 @@ public class CustomListController<T> {
     public CustomList<T> addList(@RequestBody CustomList<T> newList){
         return listService.addList(newList);
     }
-    @DeleteMapping("all")
+    @PostMapping("delete")
     public String removeList(@RequestBody CustomList<T> oldList){
+        System.out.println("Delete @ server " + oldList.getListId());
          return listService.removeList(oldList);
     }
 
