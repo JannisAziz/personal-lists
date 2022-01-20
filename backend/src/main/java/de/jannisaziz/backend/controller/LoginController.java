@@ -32,24 +32,6 @@ public class LoginController {
     @Autowired MongoUserRepository userRepository;
     @Autowired PasswordEncoder encoder;
 
-    @GetMapping
-    public String getHello(Principal principal) {
-        final Collection<? extends GrantedAuthority> authorities = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getAuthorities();
-
-        final boolean isAllowed = authorities
-                .stream()
-                .anyMatch(g -> MongoUserDetailsService.AUTHORITY_API_READWRITE.equals(g.getAuthority()));
-
-        if (isAllowed) {
-            return "Hello " + principal.getName();
-        } else {
-            return "You dont have the necessary permissions";
-        }
-    }
-
     @PostMapping("login")
     public String login(@RequestBody LoginData loginData) {
         try {
