@@ -20,7 +20,7 @@ public class MongoUser implements UserDetails {
     @Id
     ObjectId _id;
 
-    Collection<? extends GrantedAuthority> authorities;
+    Collection<GrantedAuthority> authorities;
 
     String username = "NULL_NAME";
     String password = "NULL_PW";
@@ -30,7 +30,7 @@ public class MongoUser implements UserDetails {
     boolean isCredentialsNonExpired = true;
     boolean isEnabled = true;
 
-    public MongoUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public MongoUser(String username, String password, Collection<GrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
