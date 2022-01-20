@@ -2,12 +2,10 @@ package de.jannisaziz.backend.service;
 
 import de.jannisaziz.backend.database.CustomListDatabase;
 import de.jannisaziz.backend.model.CustomList;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.function.Function;
 
 @Service
 public class CustomListService<T>{
@@ -19,7 +17,7 @@ public class CustomListService<T>{
     public Collection<CustomList<T>> getAllLists() {
         return database.findAll();
     }
-    public CustomList<T> getListById(ObjectId id) {
+    public CustomList<T> getListById(String id) {
         return database.findById(id).orElseThrow();
     }
 
@@ -28,10 +26,10 @@ public class CustomListService<T>{
         return database.insert(newList);
     }
 
-    public String removeList(CustomList<T> oldList) {
+    public String removeList(String oldListId) {
 
-        if (database.existsById(oldList.getListId())){
-            database.delete(oldList);
+        if (database.existsById(oldListId)){
+            database.deleteById(oldListId);
             return "List removed";
         }
 

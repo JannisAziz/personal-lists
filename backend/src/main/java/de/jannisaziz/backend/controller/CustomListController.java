@@ -2,7 +2,6 @@ package de.jannisaziz.backend.controller;
 
 import de.jannisaziz.backend.model.CustomList;
 import de.jannisaziz.backend.service.CustomListService;
-import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -28,9 +27,9 @@ public class CustomListController<T> {
         return listService.getAllListsByType(type);
     }
     */
-    @GetMapping("id={id}")
+    @GetMapping("{id}")
     public CustomList<T> getListById(@PathVariable String id){
-        return listService.getListById(new ObjectId(id));
+        return listService.getListById(id);
     }
 
     // ADD & REMOVE
@@ -38,10 +37,10 @@ public class CustomListController<T> {
     public CustomList<T> addList(@RequestBody CustomList<T> newList){
         return listService.addList(newList);
     }
-    @PostMapping("delete")
-    public String removeList(@RequestBody CustomList<T> oldList){
-        System.out.println("Delete @ server " + oldList.getListId());
-         return listService.removeList(oldList);
+
+    @DeleteMapping("{oldListId}")
+    public String removeList(@PathVariable String oldListId){
+        return listService.removeList(oldListId);
     }
 
     // UPDATE

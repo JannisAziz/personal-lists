@@ -1,7 +1,5 @@
-import {ObjectId} from "mongodb";
-
 export interface CustomList {
-    listId?: ObjectId
+    listId: string
     listName: string
     listItems: Object[]
 }

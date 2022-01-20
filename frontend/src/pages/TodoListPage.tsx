@@ -19,7 +19,7 @@ export default function TodoListPage() {
     const createList = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const newList: CustomList = {
+        const newList = {
             listName: userInput,
             listItems: []
         }

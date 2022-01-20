@@ -35,7 +35,7 @@ export default function TodoList({listData}: {listData: CustomList}){
 
 
     const remove = () => {
-        removeList(listData).catch(console.error)
+        removeList(listData.listId).catch(console.error)
     }
 
     return (

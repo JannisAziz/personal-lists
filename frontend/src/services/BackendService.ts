@@ -1,24 +1,27 @@
-import {ObjectId} from "mongodb";
 import {AxiosResponse} from "axios";
 import {CustomList, LIST_TYPE} from "../models/CustomList";
+import {getUserData} from "./LoginService";
 
 const axios = require('axios').default;
 
+const getConfig = () => ({headers: {'Authorization': 'Bearer ' + getUserData().authToken}})
+
+// LISTS ACCESS
 export const getAllLists = () =>
-    axios.get("/api/lists/all/").then( (response:AxiosResponse) => response.data)
+    axios.get("/api/lists/all/", getConfig()).then( (response:AxiosResponse) => response.data)
 
-export const getListById = (id : ObjectId) =>
-    axios.get(`/api/lists/id=${id}`).then( (response:AxiosResponse) => response.data)
+export const getListById = (id : string) =>
+    axios.get(`/api/lists/${id}`, getConfig()).then( (response:AxiosResponse) => response.data)
 
-export const addList = (newList: CustomList) =>
-    axios.put("/api/lists/all/", newList).then( (response:AxiosResponse) => response.data as CustomList)
+export const addList = (newList: {}) =>
+    axios.put("/api/lists/all/", newList, getConfig()).then( (response:AxiosResponse) => response.data as CustomList)
 
-export const removeList = (oldList: CustomList) =>
-    axios.post("/api/lists/delete/", oldList).then(console.log)
+export const removeList = (oldListId: string) =>
+    axios.delete(`/api/lists/${oldListId}`, getConfig()).then(console.log)
 
 export const updateList = (updatedList: CustomList) =>
-    axios.patch("/api/lists/all/", updatedList)
+    axios.patch("/api/lists/all/", updatedList, getConfig())
 
 // dummy query
  export const getAllListsByType = (listType: LIST_TYPE) =>
-    axios.get(`/api/lists/type=${listType}`).then( (response:AxiosResponse) => response.data)
+    axios.get(`/api/lists/${listType}`, getConfig()).then( (response:AxiosResponse) => response.data)
