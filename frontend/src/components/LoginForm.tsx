@@ -1,29 +1,26 @@
-import {getUserData, hello, isLoggedIn, login, register} from "../services/LoginService";
-import {ChangeEventHandler, MouseEventHandler, useState} from "react";
+import {getUsername, hello, isLoggedIn, login, register} from "../services/LoginService";
+import {MouseEventHandler, useRef, useState} from "react";
 
 export default function LoginForm () {
-
-    const [userInput, setUserInput] = useState({username: "", password: ""})
-
-    const updateUserInput: ChangeEventHandler<HTMLInputElement> = (e) =>  {
-        e.preventDefault()
-        setUserInput({...userInput, [e.target.name]: e.target.value})
-    }
-
-    const onLogin: MouseEventHandler = (e) => {
-        e.preventDefault()
-        login(userInput).then(() => updateHelloMessage()).catch(()=> alert("Invalid Credentials"))
-    }
-
-    const onRegister: MouseEventHandler = (e) => {
-        e.preventDefault()
-        register(userInput).catch(()=> alert("User already registered"))
-    }
-
     const [helloMessage, setHelloMessage] = useState("")
 
     const updateHelloMessage = () => {
         hello().then(setHelloMessage).then().catch(console.error)
+    }
+
+    const inputUsername = useRef<HTMLInputElement>(null)
+    const inputPassword = useRef<HTMLInputElement>(null)
+
+    const newLogin: MouseEventHandler<HTMLButtonElement> = (event):void => {
+        event.preventDefault()
+        const loginData = {username: inputUsername.current?.value || "", password: inputPassword.current?.value || ""}
+        login(loginData).then(() => updateHelloMessage()).catch(()=> alert("Invalid Credentials"))
+    }
+
+    const newRegister: MouseEventHandler<HTMLButtonElement> = (event):void => {
+        event.preventDefault()
+        const loginData = {username: inputUsername.current?.value || "", password: inputPassword.current?.value || ""}
+        register(loginData).catch(()=> alert("User already registered"))
     }
 
     return (
@@ -34,22 +31,22 @@ export default function LoginForm () {
             {
                 isLoggedIn()
                 ? (
-                    <div>Logged in as: {getUserData().username}</div>
+                    <div>Logged in as: {getUsername()}</div>
                 )
                 : (
                     <form>
                         <label>
                             Username
-                            <input name={"username"} value={userInput.username} onChange={updateUserInput} />
+                            <input ref={inputUsername}/>
                         </label>
 
                         <label>
                             Password
-                            <input name={"password"} value={userInput.password} onChange={updateUserInput} />
+                            <input ref={inputPassword} type="password"/>
                         </label>
 
-                        <button onClick={onLogin}>Login</button>
-                        <button onClick={onRegister}>Register</button>
+                        <button onClick={newLogin}>Login</button>
+                        <button onClick={newRegister}>Register</button>
                     </form>
                 )
             }

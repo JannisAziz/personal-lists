@@ -1,10 +1,7 @@
 import {AxiosResponse} from "axios";
 import {CustomList, LIST_TYPE} from "../models/CustomList";
-import {getUserData} from "./LoginService";
-
+import {getConfig} from "@testing-library/react";
 const axios = require('axios').default;
-
-const getConfig = () => ({headers: {'Authorization': 'Bearer ' + getUserData().authToken}})
 
 // LISTS ACCESS
 export const getAllLists = () =>
