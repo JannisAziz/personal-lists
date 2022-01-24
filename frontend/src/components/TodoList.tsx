@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEvent, useState} from "react";
+import {ChangeEvent, FC, FormEvent, MouseEventHandler, useState} from "react";
 import {removeList, updateList} from "../services/BackendService";
 import {CustomList} from "../models/CustomList";
 import TodoItemCard from "./TodoItemCard";
@@ -6,7 +6,7 @@ import TodoItem from "../models/TodoItem";
 import AddForm from "./AddForm";
 import {ObjectId} from "mongodb";
 
-export default function TodoList({listData}: {listData: CustomList}){
+export default function TodoList({listData, onUpdateLists}: {listData: CustomList, onUpdateLists: Function}){
 
     /*// USER INPUT FOR NEW ITEM
     const [userInput, setUserInput] = useState("")
@@ -34,8 +34,9 @@ export default function TodoList({listData}: {listData: CustomList}){
     }*/
 
 
-    const remove = () => {
+    const remove: MouseEventHandler<HTMLButtonElement> = (e) => {
         removeList(listData.listId).catch(console.error)
+            .then(onUpdateLists())
     }
 
     return (
