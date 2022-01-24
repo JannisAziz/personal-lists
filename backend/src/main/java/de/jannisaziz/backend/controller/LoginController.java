@@ -10,16 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.security.Principal;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +52,26 @@ public class LoginController {
 
             userRepository.save(newUser);
             return "User '" + loginData.getUsername() + "' registered";
+        }
+    }
+
+    @DeleteMapping("delete/{userName}")
+    public String delete(@PathVariable String userName){
+        if (userRepository.findByUsername(userName).isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist");
+        else {
+            userRepository.deleteByUsername(userName);
+            return "User '" + userName + "' deleted";
+        }
+    }
+
+    @PatchMapping("update")
+    public String update(@RequestBody MongoUser updatedUserData) {
+        if (userRepository.findByUsername(updatedUserData.getUsername()).isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist");
+        else {
+            //userRepository.findAndModify(updatedUserData);
+            return "User '" + updatedUserData.getUsername() + "' updated";
         }
     }
 }

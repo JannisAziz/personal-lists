@@ -13,7 +13,7 @@ export const getUsername = () : string => extractUsernameFromToken(getToken())
 export const logOut = () : void => removeToken()
 export const isLoggedIn = ():boolean => !!getToken() // !! = !("" || null || undefined)
 
-const getAxiosConfig = () : {headers: {'Authorization': string}} => ({headers: {'Authorization': 'Bearer ' + getToken()}})
+export const getAxiosConfig = () : {headers: {'Authorization': string}} => ({headers: {'Authorization': 'Bearer ' + getToken()}})
 
 
 // USER LOGIN & REGISTER

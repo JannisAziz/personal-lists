@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Data
@@ -22,9 +23,16 @@ public class MongoUser implements UserDetails {
 
     Collection<GrantedAuthority> authorities;
 
+    // Login data // Todo: replace with 'LoginData'
     String username = "NULL_NAME";
     String password = "NULL_PW";
 
+    // User data // Todo: replace with 'UserData'
+    String fullName = "John Doe";
+    String email = "john@doe.com";
+    LocalDate birthDate = LocalDate.of(2000, 1, 1);
+
+    // Account data
     boolean isAccountNonExpired = true;
     boolean isAccountNonLocked = true;
     boolean isCredentialsNonExpired = true;

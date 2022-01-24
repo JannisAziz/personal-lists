@@ -31,6 +31,11 @@ export default function TodoListPage() {
         setUserInput('')
     }
 
+    // Todo: fix the update functionality (updated when deleting list)
+    const updateLists = () => {
+        getAllLists().then((updatedLists:CustomList[]) => setLists([...updatedLists])).catch(console.error)
+    }
+
     return (
         <article className="article">
             <Header title={pageName}/>
@@ -39,7 +44,7 @@ export default function TodoListPage() {
             <AddForm addFunc={createList} userInput={userInput} updateFunc={updateInput} />
 
             {lists?.map((list) =>
-                (<TodoList listData={list}/>)
+                (<TodoList listData={list} onUpdateLists={updateLists}/>)
             )}
         </article>
     );
